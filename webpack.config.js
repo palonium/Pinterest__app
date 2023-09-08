@@ -1,5 +1,6 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -23,7 +24,12 @@ const config = {
         new HtmlWebpackPlugin({
             template: 'index.html',
         }),
-
+        
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: './src/images', to: 'images' }
+            ],
+        }),
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],
@@ -50,6 +56,7 @@ const config = {
             // Learn more about loaders from https://webpack.js.org/loaders/
         ],
     },
+    
 };
 
 module.exports = () => {
