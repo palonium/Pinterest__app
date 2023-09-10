@@ -12,7 +12,8 @@ class Board {
 
     // Метод для отображения фотографий на доске
     displayPhotos() {
-        this.photos.forEach(() => { })
+        console.log(this.name);
+        this.photos.forEach((item) => { console.log(item) })
     }
 }
 
@@ -22,26 +23,36 @@ class BoardList {
 
     addBoard(board) {
         this.arrBoard.push(board)
+
     }
     bildListBoard() {
 
         const boards = document.getElementById('boards');
         this.arrBoard.forEach((item) => {
-            const optionBoard = document.createElement('option');
-            optionBoard.classList.add('header__board');
-            optionBoard.innerHTML = `${item.name}`;
-            boards.append(optionBoard);
+            const option = new Option(item.name, 'value');
+            boards.append(option);
 
         })
     }
 
 }
+
 const boardList = new BoardList()
-boardList.addBoard(new Board('Книги'));
-boardList.addBoard(new Board('Природа'));
-boardList.addBoard(new Board('Машины'));
+let board = new Board();
+
+
+const addBoarb = document.getElementById('addBoard');
+addBoarb.addEventListener('click', () => {
+    const NameBoard = document.querySelector('#NameBoard');
+    boardList.addBoard(new Board(NameBoard.value));
+    document.querySelectorAll('option').forEach((itm) => itm.remove());
+    boardList.bildListBoard();
+    NameBoard.value = "";
+})
+
 
 boardList.bildListBoard();
+
 
 
 
