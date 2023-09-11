@@ -1,3 +1,4 @@
+'use strict'
 class Picture {
     constructor(id, src, alt, tags, avatarSrc) {
         this.id = id;
@@ -93,4 +94,3 @@ searchInput.addEventListener("input", function () {
         }
     }
 });
-
