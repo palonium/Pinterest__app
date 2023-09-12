@@ -33,7 +33,7 @@ pictures.forEach((picture) => {
         if (picture.querySelector(".picture_menu") === null) {
             picture.append(pictureMenu);
         }
-     });
+    });
     //  picture.addEventListener('mouseout', (e) => {
     //     console.log('ss');
     //     pictureMenu.classList.add('hidden');
@@ -62,39 +62,39 @@ pictures.forEach((picture) => {
 
 pictureAdd.addEventListener('click', (e) => {
 
-     modalSelectBoard.style.opacity = '1';
-     modalSelectBoard.style.visibility = 'visible';
-    })
+    modalSelectBoard.style.opacity = '1';
+    modalSelectBoard.style.visibility = 'visible';
+})
 
-    closeModalSelectBoard.addEventListener('click', (e) => {
+closeModalSelectBoard.addEventListener('click', (e) => {
+    modalSelectBoard.style.opacity = '0';
+    modalSelectBoard.style.visibility = 'hidden';
+})
+
+window.addEventListener('click', (e) => {
+    if (e.target === modalSelectBoard) {
         modalSelectBoard.style.opacity = '0';
         modalSelectBoard.style.visibility = 'hidden';
-    })
+    }
+})
 
-    window.addEventListener('click', (e) => {
-        if(e.target === modalSelectBoard) {
-            modalSelectBoard.style.opacity = '0';
-        modalSelectBoard.style.visibility = 'hidden';
-        }
-    })
+pictureComplain.addEventListener('click', (e) => {
 
-    pictureComplain.addEventListener('click', (e) => {
+    complainModal.style.opacity = '1';
+    complainModal.style.visibility = 'visible';
+})
 
-        complainModal.style.opacity = '1';
-        complainModal.style.visibility = 'visible';
-       })
+closeComplainModal.addEventListener('click', (e) => {
+    complainModal.style.opacity = '0';
+    complainModal.style.visibility = 'hidden';
+})
 
-       closeComplainModal.addEventListener('click', (e) => {
+window.addEventListener('click', (e) => {
+    if (e.target === complainModal) {
         complainModal.style.opacity = '0';
         complainModal.style.visibility = 'hidden';
-    })
-
-    window.addEventListener('click', (e) => {
-        if(e.target === complainModal) {
-            complainModal.style.opacity = '0';
-            complainModal.style.visibility = 'hidden';
-        }
-    })
+    }
+})
 
 
 
