@@ -101,7 +101,7 @@ window.addEventListener('click', (e) => {
 
 class Complaints {
 
-    // complaints = [];
+    complaints = [];
 
     addComplaint(complaint) {
         this.complaints.push(complaint);
