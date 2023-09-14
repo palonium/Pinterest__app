@@ -1,5 +1,5 @@
 'use strict'
-import { n } from './modal-windows.js';
+import { evListener } from './modal-windows.js';
 class Picture {
     constructor(id, src, alt, tags, avatarSrc) {
         this.id = id;
@@ -44,6 +44,23 @@ class Picture {
 
         const picturesContainer = document.querySelector(".pictures");
         picturesContainer.appendChild(pictureItem);
+
+        const pictures = document.querySelectorAll('.pictures__pic-box');
+        const pictureMenu = document.createElement('div');
+        pictureMenu.classList.add('picture__menu');
+        const pictureAdd = document.createElement('button');
+        pictureAdd.innerHTML = 'Добавить на доску';
+        pictureAdd.classList.add('picture__add');
+        pictureAdd.classList.add('picture__btn');
+        pictureAdd.classList.add('btn');
+        pictureMenu.append(pictureAdd);
+        const pictureComplain = document.createElement('button');
+        pictureComplain.classList.add('picture__complain');
+        pictureComplain.classList.add('picture__btn');
+        pictureComplain.classList.add('btn');
+        pictureComplain.innerHTML = 'Пожаловаться';
+        pictureMenu.append(pictureComplain);
+        picBox.append(pictureMenu);
     }
 }
 
@@ -69,7 +86,7 @@ for (let i = 0; i < photosData.length; i++) {
     );
 
     picture.addToPage();
-    n();
+    evListener()
 }
 
 const searchInput = document.querySelector(".header__search");
@@ -93,7 +110,7 @@ searchInput.addEventListener("input", function () {
                 photo.avatarSrc
             );
             picture.addToPage();
-            n();
+            evListener()
         }
     }
 });

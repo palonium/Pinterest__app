@@ -45,7 +45,7 @@ const addBoarb = document.getElementById('addBoard');
 addBoarb.addEventListener('click', () => {
     const NameBoard = document.querySelector('#NameBoard');
     if (NameBoard.value != "") {
-        boardList.addBoard(new Board(NameBoard.value.trim()));
+        boardList.addBoard(new Board(NameBoard.value));
         document.querySelectorAll('option').forEach((itm) => itm.remove());
         boardList.bildListBoard();
         NameBoard.value = "";
