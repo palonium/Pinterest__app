@@ -19,9 +19,9 @@ class Board {
 
 
 class BoardList {
-    constructor(arrBoard) {
-        arrBoard = [];
-    }
+
+    arrBoard = [];
+
     addBoard(board) {
         this.arrBoard.push(board)
 
