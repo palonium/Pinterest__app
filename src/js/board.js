@@ -44,10 +44,12 @@ let board = new Board();
 const addBoarb = document.getElementById('addBoard');
 addBoarb.addEventListener('click', () => {
     const NameBoard = document.querySelector('#NameBoard');
-    boardList.addBoard(new Board(NameBoard.value));
-    document.querySelectorAll('option').forEach((itm) => itm.remove());
-    boardList.bildListBoard();
-    NameBoard.value = "";
+    if (NameBoard.value != "") {
+        boardList.addBoard(new Board(NameBoard.value.trim()));
+        document.querySelectorAll('option').forEach((itm) => itm.remove());
+        boardList.bildListBoard();
+        NameBoard.value = "";
+    }
 })
 
 

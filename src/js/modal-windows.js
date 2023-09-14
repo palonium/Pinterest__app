@@ -1,7 +1,7 @@
 'use strict'
 
 const pictureItems = document.querySelectorAll('.pictures-item');
-const pictures = document.querySelectorAll('.pictures__pic-box');
+// const pictures = document.querySelectorAll('.pictures__pic-box');
 const pick = document.querySelector('.pictures__pic-box');
 const body = document.querySelector('body');
 const lockPadding = document.querySelectorAll('.lock-padding');
@@ -29,22 +29,28 @@ pictureComplain.classList.add('btn');
 pictureComplain.innerHTML = 'Пожаловаться';
 pictureMenu.append(pictureComplain);
 
+export function n() {
+    const pictures = document.querySelectorAll('.pictures__pic-box');
+    pictures.forEach((picture) => {
+        picture.addEventListener('mouseover', (e) => {
+            if (picture.querySelector(".picture__menu") === null) {
+                picture.append(pictureMenu);
 
-pictures.forEach((picture) => {
-    picture.addEventListener('mouseover', (e) => {
-        if (picture.querySelector(".picture__menu") === null) {
-            picture.append(pictureMenu);
-        }
-    });
-    //  picture.addEventListener('mouseout', (e) => {
-    //     console.log('ss');
-    //     pictureMenu.classList.add('hidden');
-    //     // if(picture.querySelector('.picture_menu') !== null) {
-    //     //     picture.querySelector('.picture_menu').classList.add('hidden');
-    //     //     console.log(picture);
-    //     // }
-    //  })
-})
+            }
+        });
+        //  picture.addEventListener('mouseout', (e) => {
+        //     console.log('ss');
+        //     pictureMenu.classList.add('hidden');
+        //     // if(picture.querySelector('.picture_menu') !== null) {
+        //     //     picture.querySelector('.picture_menu').classList.add('hidden');
+        //     //     console.log(picture);
+        //     // }
+        //  })
+    })
+}
+n();
+
+
 
 // pictures.forEach((picture) => {
 //      picture.addEventListener('mouseout', (e) => {

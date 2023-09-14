@@ -1,4 +1,5 @@
 'use strict'
+import { n } from './modal-windows.js';
 class Picture {
     constructor(id, src, alt, tags, avatarSrc) {
         this.id = id;
@@ -68,6 +69,7 @@ for (let i = 0; i < photosData.length; i++) {
     );
 
     picture.addToPage();
+    n();
 }
 
 const searchInput = document.querySelector(".header__search");
@@ -91,6 +93,7 @@ searchInput.addEventListener("input", function () {
                 photo.avatarSrc
             );
             picture.addToPage();
+            n();
         }
     }
 });
