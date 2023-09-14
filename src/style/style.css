@@ -179,7 +179,7 @@
     opacity: 0;
 }
 
-.photo-board_content {
+.photo-board__content {
     background-color: rgba(205, 200, 198, 0.8); 
     margin: 15% auto;
     padding: 15px;
@@ -210,7 +210,7 @@
 
 
 
-.picture_menu {
+.picture__menu {
     position:absolute;
     background-color: rgba(81, 72, 72, 0.7);
     border: 1px solid rgb(240, 164, 177);
@@ -229,7 +229,7 @@
     opacity: 0;
     visibility: hidden;
 }
- .picture_btn {
+ .picture__btn {
     background-color: rgb(241, 117, 117);
     border: 0.5px solid black;
     border-radius: 5px;
@@ -237,7 +237,7 @@
     cursor: pointer;
 }
 
-.picture_add {
+.picture__add {
     margin-bottom: 10px;
 }
 
