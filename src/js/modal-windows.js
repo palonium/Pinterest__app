@@ -11,6 +11,11 @@ class Complaints {
     addComplaint() {
         ComplainsArray.push(this);
     }
+
+    addComplaintToPage() {
+        const complainList = document.querySelector('.complain-list');
+        
+    }
 }
 const complain = new Complaints();
 
