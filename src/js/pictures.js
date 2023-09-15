@@ -45,6 +45,7 @@ class Picture {
         const picturesContainer = document.querySelector(".pictures");
         picturesContainer.appendChild(pictureItem);
 
+        
         const pictures = document.querySelectorAll('.pictures__pic-box');
         const pictureMenu = document.createElement('div');
         pictureMenu.classList.add('picture__menu');
