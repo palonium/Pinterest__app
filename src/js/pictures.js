@@ -129,7 +129,6 @@ function addPhotoFromDevice() {
             img.className = 'pic';
             img.src = reader.result;
 
-            
             const newPhotoId = `pic${photosData.length + 1}`;
 
             const newPhotoData = {
@@ -139,7 +138,7 @@ function addPhotoFromDevice() {
                 avatarSrc: 'img/avatar.jpg',
             };
             photosData.push(newPhotoData);
-            
+
             const newPicture = new Picture(
                 newPhotoId,
                 newPhotoData.src,
@@ -148,7 +147,17 @@ function addPhotoFromDevice() {
                 newPhotoData.avatarSrc
             );
             newPicture.addToPage();
+
+            const newPicBox = document.getElementById(newPhotoId);
+            newPicBox.addEventListener('mouseover', () => {
+                newPicBox.querySelector('.picture__menu').classList.add('visible');
+            });
+            newPicBox.addEventListener('mouseout', () => {
+                newPicBox.querySelector('.picture__menu').classList.remove('visible');
+            });
         };
     }
-    addEventListenersToPictures();
 }
+
+const uploadButton = document.getElementById('uploadButton');
+uploadButton.addEventListener('click', addPhotoFromDevice);
