@@ -12,10 +12,10 @@ class Complaints {
         ComplainsArray.push(this);
     }
 
-    addComplaintToPage() {
-        const complainList = document.querySelector('.complain-list');
+    // addComplaintToPage() {
+    //     const complainList = document.querySelector('.complain-list');
         
-    }
+    // }
 }
 const complain = new Complaints();
 
