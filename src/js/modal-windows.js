@@ -32,7 +32,7 @@ const complain = new Complaints();
 
 export function evListener() {
     const pictures = document.querySelectorAll('.pictures__pic-box');
-    const pictureItems = document.querySelectorAll('.pictures-item');
+    const pictureItem = document.querySelector('.pictures-item');
     const body = document.querySelector('body');
     const lockPadding = document.querySelectorAll('.lock-padding');
     const addBtn = document.querySelector('.picture__add');
@@ -75,9 +75,16 @@ export function evListener() {
         }
     })
 
+    function findAncestor (el, cls) {
+        while ((el = el.parentElement) && !el.classList.contains(cls));
+        console.log(el);
+        return el;
+    }
+    
     pictureComplain.forEach((complain) => {
         complain.addEventListener('click', (e) => {
             complainModal.classList.add('visible');
+            findAncestor(complain, 'pictures__pic-box');
         });
     })
 
