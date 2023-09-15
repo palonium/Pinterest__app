@@ -20,7 +20,6 @@ class Complaints {
 const complain = new Complaints();
 
 
-
 export function evListener() {
     const pictures = document.querySelectorAll('.pictures__pic-box');
     const pictureItems = document.querySelectorAll('.pictures-item');
