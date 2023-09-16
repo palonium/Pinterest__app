@@ -52,7 +52,7 @@
             </select>
             <input type="file">
             <input type="text" id="hashTagInput" placeholder="Введите хэштег">
-            <button onclick="addPhotoFromDevice()">Загрузить фото</button>
+            <button id="uploadButton">Загрузить фото</button>
 
         </header>
         <div class="pictures">
@@ -170,6 +170,100 @@
         </div>
     </div>
 
+    <div class="complain-board">
+        <div class="complain-board__content">
+            <h2 class="complain-board__title">Список жалоб</h2>
+            <div class="complain-list"></div>
+            <button class="complain-board__btn">Закрыть</button>
+        </div>
+    </div>
+    </div>
+    <div class="complains">
+        <div class="complain__container">
+            <p class="complain__title">Жалоба на пин</p>
+            <div class="complain">
+                <label class="complain__item">
+                    <input class='radio' type="radio" name="gender" value="male">
+                    <div class="complain__text-box">
+                        <h2 class="complain__tit">Спам</h2>
+                        <p class="complain__text">Вводящие в заблуждение или повторяющиеся публикации</p>
+                    </div>
+                </label>
+                <label class="complain__item">
+                    <input class='radio' type="radio" name="gender" value="male">
+                    <div class="complain__text-box">
+                        <h2 class="complain__tit">Враждебные высказывания или символы</h2>
+                        <p class="complain__text">Публикации с подписями, в которых поощряются насилие или агрессия в
+                            отношении других людей на основании их личных характеристик</p>
+                    </div>
+                </label>
+                <label class="complain__item">
+                    <input class='radio' type="radio" name="gender" value="male">
+                    <div class="complain__text-box">
+                        <h2 class="complain__tit">Ложная информация</h2>
+                        <p class="complain__text">Вводящие в заблуждение публикации</p>
+                    </div>
+                </label>
+                <label class="complain__item">
+                    <input class='radio' type="radio" name="gender" value="male">
+                    <div class="complain__text-box">
+                        <h2 class="complain__tit">Мошенничество или обман</h2>
+                        <p class="complain__text">Мошенничество или обман</p>
+                    </div>
+                </label>
+                <label class="complain__item">
+                    <input class='radio' type="radio" name="gender" value="male">
+                    <div class="complain__text-box">
+                        <h2 class="complain__tit">Нарушение прав на интеллектуальную собственность</h2>
+                        <p class="complain__text">Нарушение прав на интеллектуальную собственность</p>
+                    </div>
+                </label>
+                <label class="complain__item">
+                    <input class='radio' type="radio" name="gender" value="male">
+                    <div class="complain__text-box">
+                        <h2 class="complain__tit">Травля или преследование</h2>
+                        <p class="complain__text">Травля или преследование</p>
+                    </div>
+                </label>
+                <label class="complain__item">
+                    <input class='radio' type="radio" name="gender" value="male">
+                    <div class="complain__text-box">
+                        <h2 class="complain__tit">Насилие или опасные организации</h2>
+                        <p class="complain__text">Угроза насилия, жестокое обращение с животными,опасные организации или
+                            люди, смерть или тяжелая травма</p>
+                    </div>
+                </label>
+                <label class="complain__item">
+                    <input class='radio' type="radio" name="gender" value="male">
+                    <div class="complain__text-box">
+                        <h2 class="complain__tit">Самоубийство или нанесение себе увечий</h2>
+                        <p class="complain__text">Публикации, поощряющие или пропагандирующие нанесение себе вреда, в
+                            том числе самоубийство и порезы</p>
+                    </div>
+                </label>
+                <label class="complain__item">
+                    <input class='radio' type="radio" name="gender" value="male">
+                    <div class="complain__text-box">
+                        <h2 class="complain__tit">Изображение обнаженного тела или действий сексуального характера</h2>
+                        <p class="complain__text">Изображение обнаженного тела или порнография, сексуальная эксплуатация
+                            или домогательство, публикация личных фото, материалы с изображением детей</p>
+                    </div>
+                </label>
+            </div>
+            <div class="complain__buttons">
+                <button class="complain__send btn">Отправить</button>
+                <button class="complain__send complain__close btn">Отменить</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="susuccessful-complain">
+        <div class="susuccessful-complain__content">
+            <p class="susuccessful-complain__message">Спасибо что сообщили нам об этом!</p>
+            <button class="susuccessful-complain__btn">Закрыть</button>
+        </div>
+    </div>
+
     <div class="complain-list">
         <h2 class="complain-list__title">Список жалоб</h2>
     </div>
@@ -177,7 +271,6 @@
     </div>
     <!--     
             <script src="./js/pictures.js"></script>
-
             <script src="./js/board.js"></script>
             <script src="./js/modal-windows.js"></script> -->
 </body>
