@@ -78,11 +78,13 @@
     }
 }
 
-.board-list__name {
+.board-list__name,
+.user__name {
     cursor: pointer;
 }
 
-.board-list__name:hover {
+.board-list__name:hover,
+.user__name:hover {
     color: rgb(32, 21, 97)
 }
 
