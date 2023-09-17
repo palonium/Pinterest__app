@@ -1,30 +1,37 @@
 
 import { boardList } from './board.js';
 const ComplainsArray = [];
-
+export const arrEv = [];
 class Complaints {
 
     constructor(text, user) {
         this.text = text,
             this.user = user;
+        // this.photo = photo;
     }
 
     addComplaint() {
         ComplainsArray.push(this);
     }
 
-    // addComplaintToPage() {
-    //     const complainList = document.querySelector('.complain-list');
-
-    // }
+    addComplaintToPage() {
+        const complainList = document.querySelector('.complain-list');
+        const newComplain = document.createElement('div');
+        newComplain.classList.add('complain-list__item');
+        const newComplainAuthor = document.createElement('p');
+        newComplainAuthor.innerHTML = this.user;
+        newComplain.append(newComplainAuthor);
+        const newComplainText = document.createElement('p');
+        newComplainText.innerHTML = this.text;
+        newComplain.append(newComplainText);
+        complainList.append(newComplain);
+    }
 }
 const complain = new Complaints();
 
-export const arrEv = [];
-
 export function evListener() {
     const pictures = document.querySelectorAll('.pictures__pic-box');
-    const pictureItems = document.querySelectorAll('.pictures-item');
+    const pictureItem = document.querySelector('.pictures-item');
     const body = document.querySelector('body');
     const lockPadding = document.querySelectorAll('.lock-padding');
     const addBtn = document.querySelector('.picture__add');
@@ -35,13 +42,18 @@ export function evListener() {
     const pictureMenu = document.querySelectorAll('.picture__menu');
     const pictureAdd = document.querySelectorAll('.picture__add');
     const pictureComplain = document.querySelectorAll('.picture__complain');
+    // const sendComplain = document.querySelector('.complain__send');
     const sendComplain = document.querySelectorAll('.complain__send');
+    // const complainItem = document.querySelector('.complain__item');
+    const comp = document.querySelector('.complain');
     const susuccessfulComplainMessage = document.querySelector('.susuccessful-complain');
     const closeSusuccessfulComplainMessage = document.querySelector('.susuccessful-complain__btn');
+    const complaintListOpen = document.querySelector('.footer__complaint-btn');
+    const complaintList = document.querySelector('.complain-board');
+    const complaintListClose = document.querySelector('.complain-board__btn');
 
     pictures.forEach((picture) => {
         picture.addEventListener('mouseover', (e) => {
-            console.log(e.target.tagName)
             if (e.target.tagName == 'IMG') { arrEv.push(e.target); }
             picture.querySelector('.picture__menu').classList.add('visible');
         });
@@ -66,11 +78,16 @@ export function evListener() {
         }
     })
 
+    function findAncestor(el, cls) {
+        while ((el = el.parentElement) && !el.classList.contains(cls));
+        return el;
+    }
+
     pictureComplain.forEach((complain) => {
         complain.addEventListener('click', (e) => {
             complainModal.classList.add('visible');
+            findAncestor(complain, 'pictures__pic-box');
         });
-
     })
 
     closeComplainModal.addEventListener('click', (e) => {
@@ -83,19 +100,36 @@ export function evListener() {
         }
     })
 
+    // sendComplain.addEventListener('click', (e) => {
+    //     susuccessfulComplainMessage.classList.add('visible');
+    //     complainModal.classList.remove('visible');
+    //     const radios = comp.querySelectorAll('.radio');
+    //         radios.forEach((radio) => {
+    //             if (radio.checked) {
+    //                 let parent = radio.parentElement;
+    //                 let text = parent.querySelector('.complain__tit').innerHTML;
+    //                 complain.text = text;
+    //                 complain.user = 'user';
+    //                 complain.addComplaint();
+    //                 complain.addComplaintToPage();
+    //             }
+    //         })
+    //     });
+
     sendComplain.forEach((send) => {
         send.addEventListener('click', (e) => {
             susuccessfulComplainMessage.classList.add('visible');
             complainModal.classList.remove('visible');
             const radios = document.querySelectorAll('.radio');
+            console.log(sendComplain);
             radios.forEach((radio) => {
                 if (radio.checked) {
                     let parent = radio.parentElement;
                     let text = parent.querySelector('.complain__tit').innerHTML;
-                    // console.log(text);
                     complain.text = text;
                     complain.user = 'user';
                     complain.addComplaint();
+                    complain.addComplaintToPage();
                 }
             })
         });
@@ -111,6 +145,19 @@ export function evListener() {
         }
     })
 
+    complaintListOpen.addEventListener('click', (e) => {
+        complaintList.classList.add('visible');
+    })
+
+    complaintListClose.addEventListener('click', (e) => {
+        complaintList.classList.remove('visible');
+    })
+
+    window.addEventListener('click', (e) => {
+        if (e.target === complaintList) {
+            complaintList.classList.remove('visible');
+        }
+    })
 }
 evListener();
 

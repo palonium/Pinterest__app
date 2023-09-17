@@ -1,5 +1,6 @@
 
 import { arrEv } from './modal-windows.js';
+import { photosData, addToPage } from './pictures.js';
 const boards = document.getElementById('boards');
 const NameBoard = document.querySelector('#NameBoard');
 const addBoarb = document.getElementById('addBoard');
@@ -10,18 +11,10 @@ class Board {
     constructor(name) {
         this.name = name;
         this.photos = [];
-    }
-
-    // Метод для добавления фотографии на доску
+    };
     addPhoto(photo) {
         this.photos.push(photo);
-    }
-
-    // Метод для отображения фотографий на доске
-    displayPhotos() {
-        console.log(this.name);
-        this.photos.forEach((item) => { console.log(item) })
-    }
+    };
 }
 
 
@@ -39,8 +32,7 @@ class BoardList {
         this.arrBoard.forEach((item) => {
             const option = new Option(item.name, item.name);
             boards.append(option);
-            boardList.bildWidowsBoard();
-            // this.arrBoard.forEach((ev) => { ev.src });
+            boardList.bildWidowsBoard()
         })
     }
     bildWidowsBoard() {
@@ -55,7 +47,6 @@ class BoardList {
             p.innerHTML = `${i} ${it.name}`;
             ++i;
             p.addEventListener('click', (even) => {
-
 
                 this.arrBoard.forEach((a) => {
 
@@ -75,10 +66,10 @@ class BoardList {
 }
 
 export const boardList = new BoardList();
-let board = new Board();
 
-boardList.bildWidowsBoard()
-boards
+
+boardList.bildWidowsBoard();
+
 
 addBoarb.addEventListener('click', () => {
 
@@ -86,29 +77,42 @@ addBoarb.addEventListener('click', () => {
         boardList.addBoard(new Board(NameBoard.value));
         document.querySelectorAll('option').forEach((itm) => itm.remove());
         boardList.bildListBoard();
-
-
         NameBoard.value = "";
     }
-})
+});
+
 function outputBoardList() {
 
     boards.addEventListener('click', (event) => {
 
         boardList.arrBoard.forEach((ev) => {
             if (event.target.value == ev.name) {
-
-                // ev.photos.addToPage();
+                document.querySelectorAll('.pictures-item').forEach((itm) => itm.remove());
+                photosData.forEach((a) => {
+                    console.log(a);
+                    ev.photos.forEach((c) => {
+                        // addToPage(c)
+                        if (c.src.includes(a.src, 20)) {
+                            let item = 0;
+                            addToPage(
+                                `pic${item + 1}`,
+                                a.src,
+                                a.alt,
+                                a.tags,
+                                a.avatarSrc
+                            );
+                        }
+                    });
+                });
             }
         });
 
-    })
+    });
 }
 
 
 
 outputBoardList();
-// boardList.arrBoard.forEach((ev) => { ev.src });
 boardList.bildListBoard();
 
 
