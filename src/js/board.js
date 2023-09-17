@@ -137,9 +137,12 @@ export const boardList = new BoardList();
 
 boardList.bildWidowsBoard();
 
-document.querySelectorAll('.user__name').forEach(x => x.addEventListener('click', () => {
+const s = document.querySelector('.users-list')
+s.addEventListener('click', () => {
+    document.querySelectorAll('option').forEach((itm) => itm.remove());
     boardList.bildListBoard();
-}))
+    boardList.bildWidowsBoard();
+})
 
 addBoarb.addEventListener('click', () => {
 
@@ -178,29 +181,24 @@ export function outputBoardList() {
             listUser.arrUser.forEach((itemd) => {
                 let a = listUser.selected.find(i => i.id == itemd.id)
                 if (a != undefined) {
-                    boardList.arrBoard.forEach((ev) => {
-                        listUser.arrUser.forEach((itemd) => {
-                            let a = listUser.selected.find(i => i.id == itemd.id)
-                            if (a != undefined) {
-                                if (event.target.value == ev.name) {
-                                    document.querySelectorAll('.pictures-item').forEach((itm) => itm.remove());
-                                    photosData.forEach((a) => {
-                                        ev.photos.forEach((c) => {
-                                            if (c.src.includes(a.src, 20)) {
-                                                let item = 0;
-                                                addToPage(
-                                                    `pic${item + 1}`,
-                                                    a.src,
-                                                    a.alt,
-                                                    a.tags,
-                                                    a.avatarSrc
-                                                );
-                                            }
-                                        });
-                                    });
-                                }
-                            }
-                        });
+                    itemd.arrBoardUser.forEach((ev) => {
+                        if (event.target.value == ev.name) {
+                            document.querySelectorAll('.pictures-item').forEach((itm) => itm.remove());
+                            photosData.forEach((a) => {
+                                ev.photos.forEach((c) => {
+                                    if (c.src.includes(a.src, 20)) {
+                                        let item = 0;
+                                        addToPage(
+                                            `pic${item + 1}`,
+                                            a.src,
+                                            a.alt,
+                                            a.tags,
+                                            a.avatarSrc
+                                        );
+                                    }
+                                });
+                            });
+                        }
                     })
                 }
             })
