@@ -2,7 +2,7 @@
 
 import { evListener } from './modal-windows.js';
 
-function addToPage(id, src, alt, tags, avatarSrc) {
+export function addToPage(id, src, alt, tags, avatarSrc) {
     const pictureItem = document.createElement('div');
     pictureItem.className = 'pictures-item';
     pictureItem.id = id;
@@ -58,7 +58,7 @@ function addToPage(id, src, alt, tags, avatarSrc) {
 }
 
 
-const photosData = [
+export const photosData = [
     { src: 'img/1.png', alt: '1', tags: '#дракон', avatarSrc: 'img/avatar.jpg' },
     { src: 'img/2.jpg', alt: '2', tags: '#парк', avatarSrc: 'img/avatar.jpg' },
     { src: 'img/3.jpg', alt: '2', tags: '#бойцовскийклуб', avatarSrc: 'img/avatar.jpg' },
@@ -92,10 +92,10 @@ searchInput.addEventListener('input', function () {
 
     for (let i = 0; i < photosData.length; i++) {
         const photo = photosData[i];
-        const tagsLowerCase = photo.tags.toLowerCase(); 
+        const tagsLowerCase = photo.tags.toLowerCase();
 
         if (tagsLowerCase.includes(searchTerm)) {
-            addToPage( 
+            addToPage(
                 `pic${i + 1}`,
                 photo.src,
                 photo.alt,
@@ -143,11 +143,15 @@ function addPhotoFromDevice() {
             newPicBox.addEventListener('mouseout', () => {
                 newPicBox.querySelector('.picture__menu').classList.remove('visible');
             });
+
         };
     }
+    addEventListenersToPictures();
 }
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const uploadButton = document.getElementById('uploadButton');
     uploadButton.addEventListener('click', addPhotoFromDevice);
 });
+

@@ -78,6 +78,14 @@
     }
 }
 
+.board-list__name {
+    cursor: pointer;
+}
+
+.board-list__name:hover {
+    color: rgb(32, 21, 97)
+}
+
 .pictures {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

@@ -1,11 +1,12 @@
-'use strict'
 
+import { boardList } from './board.js';
 const ComplainsArray = [];
+export const arrEv = [];
 class Complaints {
 
     constructor(text, user) {
         this.text = text,
-        this.user = user;
+            this.user = user;
         // this.photo = photo;
     }
 
@@ -27,7 +28,6 @@ class Complaints {
     }
 }
 const complain = new Complaints();
-
 
 export function evListener() {
     const pictures = document.querySelectorAll('.pictures__pic-box');
@@ -54,6 +54,7 @@ export function evListener() {
 
     pictures.forEach((picture) => {
         picture.addEventListener('mouseover', (e) => {
+            if (e.target.tagName == 'IMG') { arrEv.push(e.target); }
             picture.querySelector('.picture__menu').classList.add('visible');
         });
         picture.addEventListener('mouseout', (e) => {
@@ -77,11 +78,11 @@ export function evListener() {
         }
     })
 
-    function findAncestor (el, cls) {
+    function findAncestor(el, cls) {
         while ((el = el.parentElement) && !el.classList.contains(cls));
         return el;
     }
-    
+
     pictureComplain.forEach((complain) => {
         complain.addEventListener('click', (e) => {
             complainModal.classList.add('visible');
