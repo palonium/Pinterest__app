@@ -1,11 +1,12 @@
-'use strict'
 
+import { boardList } from './board.js';
 const ComplainsArray = [];
+
 class Complaints {
 
     constructor(text, user) {
         this.text = text,
-        this.user = user;
+            this.user = user;
     }
 
     addComplaint() {
@@ -14,12 +15,12 @@ class Complaints {
 
     // addComplaintToPage() {
     //     const complainList = document.querySelector('.complain-list');
-        
+
     // }
 }
 const complain = new Complaints();
 
-
+export const arrEv = [];
 
 export function evListener() {
     const pictures = document.querySelectorAll('.pictures__pic-box');
@@ -40,6 +41,8 @@ export function evListener() {
 
     pictures.forEach((picture) => {
         picture.addEventListener('mouseover', (e) => {
+            console.log(e.target.tagName)
+            if (e.target.tagName == 'IMG') { arrEv.push(e.target); }
             picture.querySelector('.picture__menu').classList.add('visible');
         });
         picture.addEventListener('mouseout', (e) => {

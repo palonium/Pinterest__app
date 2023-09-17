@@ -1,9 +1,9 @@
-'use strict'
 
+import { arrEv } from './modal-windows.js';
 const boards = document.getElementById('boards');
 const NameBoard = document.querySelector('#NameBoard');
 const addBoarb = document.getElementById('addBoard');
-
+const modalBoard = document.querySelector('.board-list');
 
 
 class Board {
@@ -39,18 +39,45 @@ class BoardList {
         this.arrBoard.forEach((item) => {
             const option = new Option(item.name, item.name);
             boards.append(option);
+            boardList.bildWidowsBoard();
             // this.arrBoard.forEach((ev) => { ev.src });
         })
     }
-    displayPictures() {
+    bildWidowsBoard() {
+        let i = 1;
+        document.querySelectorAll('.board-list__name').forEach((itm) => itm.remove());
+        this.arrBoard.forEach((it) => {
 
+            const p = document.createElement('p');
+            p.className = 'board-list__name';
+
+            modalBoard.append(p);
+            p.innerHTML = `${i} ${it.name}`;
+            ++i;
+            p.addEventListener('click', (even) => {
+
+
+                this.arrBoard.forEach((a) => {
+
+                    if (a.name == even.target.textContent.substring(2)) {
+                        let foto = arrEv[arrEv.length - 1];
+                        return a.addPhoto(foto);
+
+                    }
+                })
+
+                arrEv.slice(0, arrEv.length);
+                console.log(this.arrBoard);
+            })
+        })
     }
+
 }
 
-const boardList = new BoardList()
+export const boardList = new BoardList();
 let board = new Board();
 
-
+boardList.bildWidowsBoard()
 boards
 
 addBoarb.addEventListener('click', () => {
@@ -59,29 +86,29 @@ addBoarb.addEventListener('click', () => {
         boardList.addBoard(new Board(NameBoard.value));
         document.querySelectorAll('option').forEach((itm) => itm.remove());
         boardList.bildListBoard();
-        s();
+
+
         NameBoard.value = "";
     }
 })
-function s() {
+function outputBoardList() {
 
     boards.addEventListener('click', (event) => {
 
         boardList.arrBoard.forEach((ev) => {
             if (event.target.value == ev.name) {
 
+                // ev.photos.addToPage();
             }
         });
 
-        console.log(event.target.value, event.target[event.target.selectedIndex].text, event.target.selectedIndex);
-    }
-    )
+    })
 }
 
 
 
-
-boardList.arrBoard.forEach((ev) => { ev.src });
+outputBoardList();
+// boardList.arrBoard.forEach((ev) => { ev.src });
 boardList.bildListBoard();
 
 
