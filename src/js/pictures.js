@@ -54,7 +54,7 @@ export function addToPage(id, src, alt, tags, avatarSrc) {
     pictureMenu.append(pictureComplain);
     picBox.append(pictureMenu);
 
-    evListener();
+
 }
 
 
@@ -155,3 +155,4 @@ document.addEventListener('DOMContentLoaded', function () {
     uploadButton.addEventListener('click', addPhotoFromDevice);
 });
 
+evListener();

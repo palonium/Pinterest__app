@@ -21,6 +21,10 @@ class Complaints {
         const newComplainAuthor = document.createElement('p');
         newComplainAuthor.innerHTML = this.user;
         newComplain.append(newComplainAuthor);
+        const newComplainPhotoWrap = document.createElement('div');
+        const newComplainPhoto = this.photo.cloneNode(true);
+        newComplainPhotoWrap.append(newComplainPhoto);
+        newComplain.append(newComplainPhoto);
         const newComplainText = document.createElement('p');
         newComplainText.innerHTML = this.text;
         newComplain.append(newComplainText);
@@ -78,15 +82,17 @@ export function evListener() {
         }
     })
 
-    function findAncestor(el, cls) {
+    function findAncestor(el, cls,findElCls) {
         while ((el = el.parentElement) && !el.classList.contains(cls));
-        return el;
+        const findEl = el.querySelector('.pic');
+        return findEl;
     }
 
+    let result = '';
     pictureComplain.forEach((complain) => {
         complain.addEventListener('click', (e) => {
             complainModal.classList.add('visible');
-            findAncestor(complain, 'pictures__pic-box');
+           result = findAncestor(complain, 'pictures__pic-box','pic');
         });
     })
 
@@ -104,6 +110,7 @@ export function evListener() {
     //     susuccessfulComplainMessage.classList.add('visible');
     //     complainModal.classList.remove('visible');
     //     const radios = comp.querySelectorAll('.radio');
+    //     console.log(sendComplain);
     //         radios.forEach((radio) => {
     //             if (radio.checked) {
     //                 let parent = radio.parentElement;
@@ -121,13 +128,13 @@ export function evListener() {
             susuccessfulComplainMessage.classList.add('visible');
             complainModal.classList.remove('visible');
             const radios = document.querySelectorAll('.radio');
-            console.log(sendComplain);
             radios.forEach((radio) => {
                 if (radio.checked) {
                     let parent = radio.parentElement;
                     let text = parent.querySelector('.complain__tit').innerHTML;
                     complain.text = text;
                     complain.user = 'user';
+                    complain.photo = result;
                     complain.addComplaint();
                     complain.addComplaintToPage();
                 }
@@ -159,7 +166,7 @@ export function evListener() {
         }
     })
 }
-evListener();
+
 
 
 
