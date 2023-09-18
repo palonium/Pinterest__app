@@ -2,6 +2,7 @@
 import { arrEv } from './modal-windows.js';
 import { photosData, addToPage } from './pictures.js';
 import { listUser } from './user.js';
+import { storage } from './storage.js';
 const boards = document.getElementById('boards');
 const NameBoard = document.querySelector('#NameBoard');
 const addBoarb = document.getElementById('addBoard');
@@ -21,10 +22,12 @@ class Board {
 
 class BoardList {
     constructor() {
-        this.arrBoard = [];
+        this.arrBoard = storage.getBoards(); 
     }
-    addBoard(board) {
-        this.arrBoard.push(board)
+    
+      addBoard(board) {
+        this.arrBoard.push(board);
+        storage.saveBoards(this.arrBoard);
 
         listUser.arrUser.forEach((item) => {
 
@@ -145,14 +148,13 @@ s.addEventListener('click', () => {
 })
 
 addBoarb.addEventListener('click', () => {
-
     if (NameBoard.value != "") {
-        boardList.addBoard(new Board(NameBoard.value));
-        document.querySelectorAll('option').forEach((itm) => itm.remove());
-        boardList.bildListBoard();
-        NameBoard.value = "";
+      boardList.addBoard(new Board(NameBoard.value));
+      document.querySelectorAll('option').forEach((itm) => itm.remove());
+      boardList.bildListBoard();
+      NameBoard.value = "";
     }
-});
+  });
 
 export function outputBoardList() {
 
