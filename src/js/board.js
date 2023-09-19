@@ -1,6 +1,7 @@
 import { arrEv } from './modal-windows.js';
 import { photosData, addToPage } from './pictures.js';
 import { listUser } from './user.js';
+import { evListener } from './modal-windows.js';
 const boards = document.getElementById('boards');
 const NameBoard = document.querySelector('#NameBoard');
 const addBoarb = document.getElementById('addBoard');
