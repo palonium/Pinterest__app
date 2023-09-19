@@ -6,8 +6,6 @@ const boards = document.getElementById('boards');
 const NameBoard = document.querySelector('#NameBoard');
 const addBoarb = document.getElementById('addBoard');
 const modalBoard = document.querySelector('.board-list');
-
-
 class Board {
     constructor(name) {
         this.name = name;
@@ -15,17 +13,18 @@ class Board {
     };
     addPhoto(photo) {
         this.photos.push(photo);
+        saveBoardToLocalStorage(this);
     };
 }
 
 
-class BoardList {
+export class BoardList {
     constructor() {
         this.arrBoard = [];
     }
     addBoard(board) {
-        this.arrBoard.push(board)
-
+        this.arrBoard.push(board);
+        saveDataToLocalStorage();
         listUser.arrUser.forEach((item) => {
 
             let a = listUser.selected.find(i => i.id == item.id)
@@ -80,19 +79,17 @@ class BoardList {
                 ++i;
                 modalBoard.append(p);
                 p.addEventListener('click', (even) => {
-
                     this.arrBoard.forEach((a) => {
-
-                        if (a.name == even.target.textContent.substring(2)) {
+                        if (a.name == even.target.textContent.substring(2) && a instanceof Board) {
                             let foto = arrEv[arrEv.length - 1];
-                            return a.addPhoto(foto);
-
+                            a.addPhoto(foto);
                         }
-                    })
-
+                    });
+                
                     arrEv.slice(0, arrEv.length);
-
-                })
+                });
+                
+                
             })
         } else {
             listUser.arrUser.forEach((itemd) => {
@@ -127,14 +124,50 @@ class BoardList {
             )
         }
     }
-
-
+}
+export const boardList = new BoardList();
+function saveDataToLocalStorage() {
+    const dataToSave = {
+      arrBoard: boardList.arrBoard,
+    };
+    localStorage.setItem('boardData', JSON.stringify(dataToSave));
+}
+function saveBoardToLocalStorage(board) {
+    const boardData = JSON.stringify(board);
+    localStorage.setItem(`board_${board.name}`, boardData);
+    const photosArray = board.photos.map(photo => {
+        return {
+            src: photo.src,
+            alt: photo.alt,
+            tags: photo.tags,
+            avatarSrc: photo.avatarSrc
+        };
+    });
+    localStorage.setItem(`photos_${board.name}`, JSON.stringify(photosArray));
 }
 
-
-export const boardList = new BoardList();
-
-
+function loadDataFromLocalStorage() {
+    Object.keys(localStorage).forEach(key => {
+        if (key.startsWith("board_")) {
+            const boardData = localStorage.getItem(key);
+            const board = JSON.parse(boardData);
+            const newBoard = new Board(board.name);
+            const photosData = localStorage.getItem(`photos_${board.name}`);
+            const photosArray = JSON.parse(photosData) || [];
+            newBoard.photos = photosArray.map(photoData => {
+                return {
+                    src: photoData.src,
+                    alt: photoData.alt,
+                    tags: photoData.tags,
+                    avatarSrc: photoData.avatarSrc
+                };
+            });
+            
+            boardList.arrBoard.push(newBoard);
+        }
+    });
+}
+loadDataFromLocalStorage();
 boardList.bildWidowsBoard();
 
 const s = document.querySelector('.users-list')
@@ -163,7 +196,7 @@ export function outputBoardList() {
                     document.querySelectorAll('.pictures-item').forEach((itm) => itm.remove());
                     photosData.forEach((a) => {
                         ev.photos.forEach((c) => {
-                            if (c.src.includes(a.src, 20)) {
+                            if (a && c && c.src && a.src && c.src.includes(a.src, 20)) {
                                 let item = 0;
                                 addToPage(
                                     `pic${item + 1}`,
@@ -173,6 +206,7 @@ export function outputBoardList() {
                                     a.avatarSrc
                                 );
                             }
+                            
                         });
                     });
                 }
@@ -209,7 +243,3 @@ export function outputBoardList() {
 
 outputBoardList();
 boardList.bildListBoard();
-
-
-
-
