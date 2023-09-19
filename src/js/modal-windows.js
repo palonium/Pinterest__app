@@ -33,6 +33,7 @@ class Complaints {
 }
 const complain = new Complaints();
 
+
 export function evListener() {
     const pictures = document.querySelectorAll('.pictures__pic-box');
     const pictureItem = document.querySelector('.pictures-item');
@@ -51,10 +52,19 @@ export function evListener() {
     // const complainItem = document.querySelector('.complain__item');
     const comp = document.querySelector('.complain');
     const susuccessfulComplainMessage = document.querySelector('.susuccessful-complain');
+    const susuccessfulComplainMsg = document.querySelector('.susuccessful-complain__message')
     const closeSusuccessfulComplainMessage = document.querySelector('.susuccessful-complain__btn');
     const complaintListOpen = document.querySelector('.footer__complaint-btn');
     const complaintList = document.querySelector('.complain-board');
     const complaintListClose = document.querySelector('.complain-board__btn');
+    const complaintListTitle = document.querySelector('.complain-board__title');
+    const photoMagnifications = document.querySelectorAll('.svg');
+    const photoMagnification = document.querySelector('.svg');
+    const photoMagnificationFieldContent = document.querySelector('.photo-magnification-field__content');
+    const photoMagnificationField = document.querySelector('.photo-magnification-field');
+    const closePhotoMagnification = document.querySelector('.photo-magnification-field__close');
+    const closePhotoMagnifications = document.querySelectorAll('.photo-magnification-field__close');
+    const complainList = document.querySelector('.complain-list');
 
     pictures.forEach((picture) => {
         picture.addEventListener('mouseover', (e) => {
@@ -63,6 +73,16 @@ export function evListener() {
         });
         picture.addEventListener('mouseout', (e) => {
             picture.querySelector('.picture__menu').classList.remove('visible');
+        })
+        picture.addEventListener('click', (e) => {
+            photoMagnificationFieldContent.innerHTML = '';
+            const currentPhoto = picture.querySelector('.pic');
+            const cloneCurrentPhoto = currentPhoto.cloneNode(true);
+            console.log(photoMagnificationFieldContent);
+            const a = photoMagnificationFieldContent.querySelector('.pic');
+            photoMagnificationFieldContent.append(closePhotoMagnification);
+            photoMagnificationFieldContent.append(cloneCurrentPhoto);
+            photoMagnificationField.classList.add('visible');
         })
     })
 
@@ -82,7 +102,7 @@ export function evListener() {
         }
     })
 
-    function findAncestor(el, cls,findElCls) {
+    function findAncestor(el, cls, findElCls) {
         while ((el = el.parentElement) && !el.classList.contains(cls));
         const findEl = el.querySelector('.pic');
         return findEl;
@@ -92,7 +112,7 @@ export function evListener() {
     pictureComplain.forEach((complain) => {
         complain.addEventListener('click', (e) => {
             complainModal.classList.add('visible');
-           result = findAncestor(complain, 'pictures__pic-box','pic');
+            result = findAncestor(complain, 'pictures__pic-box', 'pic');
         });
     })
 
@@ -103,6 +123,43 @@ export function evListener() {
     window.addEventListener('click', (e) => {
         if (e.target === complainModal) {
             complainModal.classList.remove('visible');
+        }
+    })
+
+    // let magnPhoto = '';
+    // photoMagnifications.forEach((PhotoMg) => {
+    //     photoMagnifications[photoMagnifications.length - 1].classList.add('hidden');
+    //     PhotoMg.addEventListener('click', (e) => {
+    //         magnPhoto = findAncestor(PhotoMg, 'pictures__pic-box', 'pic');
+    //         magnPhoto.innerHTML = '';
+    //         let resultPhotoClone = magnPhoto.cloneNode(true);
+    //         photoMagnificationFieldContent.innerHTML = '';
+    //         photoMagnificationFieldContent.append(closePhotoMagnification.cloneNode(true));
+    //         photoMagnificationFieldContent.append(resultPhotoClone);
+            // photoMagnificationField.classList.add('visible');
+    //         // const a = photoMagnificationFieldContent.querySelector('.photo-magnification-field__close');
+    //         // a.addEventListener('click', (e) => {
+    //         //     photoMagnificationField.classList.remove('visible');
+    //         // })
+    //     })
+    // }
+    // )
+
+    // closePhotoMagnifications.forEach((btn) => {
+    //     btn.addEventListener('click', (e) => {
+    //         photoMagnificationField.classList.add('hidden');
+    //         console.log('sa');
+    // })
+    // })
+
+    closePhotoMagnification.addEventListener('click', (e) => {
+        photoMagnificationField.classList.remove('visible');
+    })
+
+
+    window.addEventListener('click', (e) => {
+        if (e.target === photoMagnificationField) {
+            photoMagnificationField.classList.remove('visible');
         }
     })
 
@@ -154,6 +211,11 @@ export function evListener() {
 
     complaintListOpen.addEventListener('click', (e) => {
         complaintList.classList.add('visible');
+        // if(complaintList.textContent.trim().length) {
+        //     complaintListTitle.innerHTML = 'Список пуст';
+        // }else{
+        //     complaintListTitle.innerHTML = 'Список жалоб';
+        // }
     })
 
     complaintListClose.addEventListener('click', (e) => {
@@ -166,7 +228,6 @@ export function evListener() {
         }
     })
 }
-
 
 
 

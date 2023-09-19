@@ -119,6 +119,7 @@ searchInput.addEventListener('input', function () {
                 photo.avatarSrc
             ); }
         }
+        evListener();
     });
 function addPhotoFromDevice(fileInput, hashTagInput) {
     const file = fileInput.files[0];
