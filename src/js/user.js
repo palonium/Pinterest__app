@@ -13,19 +13,16 @@ export class User {
 
 
 }
+
+
 class UserList {
     constructor() {
         this.arrUser = [];
-        this.selected = []
+        this.selected = [];
     }
 
-    selectedUser(user) {
-
-    }
-    clirSelected() {
-        this.selected.splice(1, 1)
-    }
     bildUserList() {
+
 
         this.arrUser.forEach((it) => {
             const pUser = document.createElement('p');
@@ -37,9 +34,11 @@ class UserList {
                 this.arrUser.forEach((usSel) => {
 
                     if (usSel.name == event.target.textContent) {
-
+                        document.querySelectorAll('.user__selected').forEach(a => a.classList.remove('user__selected'));
                         this.selected.splice(0, 1)
                         this.selected.push(usSel);
+                        pUser.className = 'user__selected';
+                        saveListUserToLocalStorage(listUser);
 
                         return;
                     }
@@ -52,22 +51,44 @@ class UserList {
     }
 
 }
-export const listUser = new UserList();
 
-
+export let listUser = new UserList();
+let dataUser = getListUserTolocalStorege()
 function addUser() {
-    const promise = fetch('https://jsonplaceholder.typicode.com/users');
 
+    const promise = fetch('https://jsonplaceholder.typicode.com/users');
     promise.then((response) => {
         response.json().then((data) => {
-
-            data.forEach(item => listUser.arrUser.push(new User(item.id, item.name, item.email)));
+            console.log(listUser.arrUser.length === 0);
+            data.forEach(item => {
+                listUser.arrUser.push(new User(item.id, item.name, item.email))
+            });
             listUser.bildUserList();
-
+            saveListUserToLocalStorage(listUser)
         })
     }
     )
+
+
+
+
 }
-
-
 addUser();
+
+export function saveListUserToLocalStorage(listUser) {
+    // localStorage.removeItem(`listUsers`)
+    localStorage.setItem(`listUsers`, JSON.stringify(listUser));
+}
+function getListUserTolocalStorege() {
+    return JSON.parse(localStorage.getItem(`listUsers`));
+
+}
+dataUser.arrUser.forEach(a => listUser = new UserList(a))
+
+console.log(getListUserTolocalStorege());
+
+// if(listUser.arrUser===0)
+// getListUserTolocalStorege()
+
+
+

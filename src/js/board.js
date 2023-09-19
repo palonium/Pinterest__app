@@ -1,6 +1,6 @@
 import { arrEv } from './modal-windows.js';
 import { photosData, addToPage } from './pictures.js';
-import { listUser } from './user.js';
+import { saveListUserToLocalStorage, listUser } from './user.js';
 const boards = document.getElementById('boards');
 const NameBoard = document.querySelector('#NameBoard');
 const addBoarb = document.getElementById('addBoard');
@@ -13,6 +13,7 @@ class Board {
     addPhoto(photo) {
         this.photos.push(photo);
         saveBoardToLocalStorage(this);
+        saveListUserToLocalStorage(listUser)
     };
 }
 
@@ -24,33 +25,36 @@ export class BoardList {
     addBoard(board) {
         this.arrBoard.push(board);
         saveDataToLocalStorage();
+        saveListUserToLocalStorage(listUser);
         listUser.arrUser.forEach((item) => {
 
-            let a = listUser.selected.find(i => i.id == item.id)
+            let a = listUser.selected.find(i => i.id == item.id);
             if (a != undefined) {
+                saveDataToLocalStorage();
+                saveListUserToLocalStorage(listUser);
                 item.arrBoardUser.push(board);
                 console.log(item);
                 return;
             }
-
         })
     }
     bildListBoard() {
-        if (listUser.selected.length < 1) {
+
+        if (listUser.selected.length === 0) {
             this.arrBoard.forEach((item) => {
                 const option = new Option(item.name, item.name);
                 boards.append(option);
-                boardList.bildWidowsBoard()
-            })
+                boardList.bildWidowsBoard();
+            });
         } else {
             listUser.arrUser.forEach((item1) => {
 
-                let a = listUser.selected.find(i => i.id == item1.id)
+                let a = listUser.selected.find(i => i.id == item1.id);
                 if (a != undefined) {
                     item1.arrBoardUser.forEach((z) => {
                         const option = new Option(z.name, z.name);
                         boards.append(option);
-                        boardList.bildWidowsBoard()
+                        boardList.bildWidowsBoard();
 
                     })
 
@@ -80,15 +84,21 @@ export class BoardList {
                 p.addEventListener('click', (even) => {
                     this.arrBoard.forEach((a) => {
                         if (a.name == even.target.textContent.substring(2) && a instanceof Board) {
+
                             let foto = arrEv[arrEv.length - 1];
-                            a.addPhoto(foto);
+
+                            if (!a.photos.includes(foto)) {
+                                return a.addPhoto(foto);
+                            } else (alert("Фото есть на доске!"));
+
+
                         }
                     });
-                
+
                     arrEv.slice(0, arrEv.length);
                 });
-                
-                
+
+
             })
         } else {
             listUser.arrUser.forEach((itemd) => {
@@ -109,7 +119,9 @@ export class BoardList {
 
                                 if (a.name == even.target.textContent.substring(2)) {
                                     let foto = arrEv[arrEv.length - 1];
-                                    return a.addPhoto(foto);
+                                    if (!a.photos.includes(foto)) {
+                                        return a.addPhoto(foto);
+                                    } else (alert("Фото есть на доске!"));
 
                                 }
                             })
@@ -125,9 +137,10 @@ export class BoardList {
     }
 }
 export const boardList = new BoardList();
+
 function saveDataToLocalStorage() {
     const dataToSave = {
-      arrBoard: boardList.arrBoard,
+        arrBoard: boardList.arrBoard,
     };
     localStorage.setItem('boardData', JSON.stringify(dataToSave));
 }
@@ -161,19 +174,19 @@ function loadDataFromLocalStorage() {
                     avatarSrc: photoData.avatarSrc
                 };
             });
-            
+
             boardList.arrBoard.push(newBoard);
         }
     });
 }
 loadDataFromLocalStorage();
 boardList.bildWidowsBoard();
-
 const s = document.querySelector('.users-list')
 s.addEventListener('click', () => {
     document.querySelectorAll('option').forEach((itm) => itm.remove());
     boardList.bildListBoard();
     boardList.bildWidowsBoard();
+
 })
 
 addBoarb.addEventListener('click', () => {
@@ -184,6 +197,7 @@ addBoarb.addEventListener('click', () => {
         boardList.bildListBoard();
         NameBoard.value = "";
     }
+
 });
 
 export function outputBoardList() {
@@ -205,17 +219,17 @@ export function outputBoardList() {
                                     a.avatarSrc
                                 );
                             }
-                            
+
                         });
                     });
                 }
             })
         } else {
             listUser.arrUser.forEach((itemd) => {
-                let a = listUser.selected.find(i => i.id == itemd.id)
+                let a = listUser.selected.find(i => i.id === itemd.id)
                 if (a != undefined) {
                     itemd.arrBoardUser.forEach((ev) => {
-                        if (event.target.value == ev.name) {
+                        if (event.target.value === ev.name) {
                             document.querySelectorAll('.pictures-item').forEach((itm) => itm.remove());
                             photosData.forEach((a) => {
                                 ev.photos.forEach((c) => {
