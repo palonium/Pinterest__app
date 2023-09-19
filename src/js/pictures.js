@@ -98,7 +98,28 @@ function getPhotosFromLocalStorage() {
     const photosDataStr = localStorage.getItem('photosData');
     return photosDataStr ? JSON.parse(photosDataStr) : [];
 }
+const searchInput = document.querySelector('.header__search');
+searchInput.addEventListener('input', function () {
+    const searchTerm = searchInput.value.toLowerCase();
+    const picturesContainer = document.querySelector('.pictures');
+    while (picturesContainer.firstChild) {
+        picturesContainer.removeChild(picturesContainer.firstChild);
+    }
 
+    for (let i = 0; i < photosData.length; i++) {
+        const photo = photosData[i];
+        const tagsLowerCase = photo.tags.toLowerCase(); 
+
+        if (tagsLowerCase.includes(searchTerm)) {
+            addToPage( 
+                `pic${i + 1}`,
+                photo.src,
+                photo.alt,
+                photo.tags,
+                photo.avatarSrc
+            ); }
+        }
+    });
 function addPhotoFromDevice(fileInput, hashTagInput) {
     const file = fileInput.files[0];
     const hashTag = hashTagInput.value;
