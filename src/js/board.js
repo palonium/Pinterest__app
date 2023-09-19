@@ -24,14 +24,14 @@ export class BoardList {
     }
     addBoard(board) {
         this.arrBoard.push(board);
-        saveDataToLocalStorage();
         saveListUserToLocalStorage(listUser);
+
         listUser.arrUser.forEach((item) => {
 
             let a = listUser.selected.find(i => i.id == item.id);
             if (a != undefined) {
-                saveDataToLocalStorage();
-                saveListUserToLocalStorage(listUser);
+
+
                 item.arrBoardUser.push(board);
                 console.log(item);
                 return;
@@ -50,6 +50,7 @@ export class BoardList {
             listUser.arrUser.forEach((item1) => {
 
                 let a = listUser.selected.find(i => i.id == item1.id);
+
                 if (a != undefined) {
                     item1.arrBoardUser.forEach((z) => {
                         const option = new Option(z.name, z.name);

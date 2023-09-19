@@ -76,19 +76,19 @@ function addUser() {
 addUser();
 
 export function saveListUserToLocalStorage(listUser) {
-    // localStorage.removeItem(`listUsers`)
     localStorage.setItem(`listUsers`, JSON.stringify(listUser));
 }
 function getListUserTolocalStorege() {
     return JSON.parse(localStorage.getItem(`listUsers`));
 
 }
-dataUser.arrUser.forEach(a => listUser = new UserList(a))
+// console.log(dataUser.arrUser);
+if (dataUser != null) {
+    dataUser.arrUser.forEach(a => listUser = new UserList(a))
+}
 
-console.log(getListUserTolocalStorege());
 
-// if(listUser.arrUser===0)
-// getListUserTolocalStorege()
+
 
 
 
