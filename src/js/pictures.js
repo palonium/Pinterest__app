@@ -108,19 +108,24 @@ searchInput.addEventListener('input', function () {
 
     for (let i = 0; i < photosData.length; i++) {
         const photo = photosData[i];
-        const tagsLowerCase = photo.tags.toLowerCase(); 
+        const tagsLowerCase = photo.tags.toLowerCase();
 
         if (tagsLowerCase.includes(searchTerm)) {
-            addToPage( 
+            addToPage(
                 `pic${i + 1}`,
                 photo.src,
                 photo.alt,
                 photo.tags,
                 photo.avatarSrc
-            ); }
+            );
         }
-        evListener();
-    });
+
+    }
+
+
+    evListener();
+});
+
 function addPhotoFromDevice(fileInput, hashTagInput) {
     const file = fileInput.files[0];
     const hashTag = hashTagInput.value;
@@ -156,7 +161,7 @@ function addPhotoFromDevice(fileInput, hashTagInput) {
                 newPicBox.querySelector('.picture__menu').classList.remove('visible');
             });
 
-            savePhotosToLocalStorage(); 
+            savePhotosToLocalStorage();
         };
     }
 }

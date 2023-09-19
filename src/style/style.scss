@@ -395,7 +395,7 @@
 
     &__wrapper {
         margin: auto;
-        width:400px;
+        width: 400px;
         display: flex;
         background-color: rgba(205, 200, 198, 0.8);
         padding: 15px;
@@ -432,12 +432,22 @@
     visibility: visible;
 }
 
+
+.user__selected {
+    background-color: aquamarine;
+    padding: 3px;
+    border-radius: 3px;
+    opacity: 90;
+    cursor: default;
+
+}
+
 .svg {
     // opacity: 0;
     // visibility: hidden;
     cursor: pointer;
-        svg {
-                width: 50px;
-        }
-}
 
+    svg {
+        width: 50px;
+    }
+}
