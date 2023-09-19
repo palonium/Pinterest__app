@@ -1,4 +1,3 @@
-
 import { arrEv } from './modal-windows.js';
 import { photosData, addToPage } from './pictures.js';
 import { listUser } from './user.js';
