@@ -33,6 +33,14 @@ class Complaints {
 }
 const complain = new Complaints();
 
+function addComplaintToLS() {
+    localStorage.setItem('complaints', JSON.stringify(complain));
+}
+
+function getComplaintFromLS() {
+    const complainToStr = localStorage.getItem('complaints');
+    return complainToStr ? JSON.parse(complainToStr) : [];
+}
 
 export function evListener() {
     const pictures = document.querySelectorAll('.pictures__pic-box');
@@ -74,21 +82,21 @@ export function evListener() {
         picture.addEventListener('mouseout', (e) => {
             picture.querySelector('.picture__menu').classList.remove('visible');
         })
-        picture.addEventListener('click', (e) => {
+        picture.addEventListener('click', (e)  => {
             photoMagnificationFieldContent.innerHTML = '';
             const currentPhoto = picture.querySelector('.pic');
             const cloneCurrentPhoto = currentPhoto.cloneNode(true);
-            console.log(photoMagnificationFieldContent);
             const a = photoMagnificationFieldContent.querySelector('.pic');
             photoMagnificationFieldContent.append(closePhotoMagnification);
             photoMagnificationFieldContent.append(cloneCurrentPhoto);
             photoMagnificationField.classList.add('visible');
-        })
+        }, false)
     })
 
     pictureAdd.forEach((btn) => {
         btn.addEventListener('click', (e) => {
             modalSelectBoard.classList.add('visible');
+            e.stopPropagation();
         });
     })
 
@@ -113,6 +121,7 @@ export function evListener() {
         complain.addEventListener('click', (e) => {
             complainModal.classList.add('visible');
             result = findAncestor(complain, 'pictures__pic-box', 'pic');
+            e.stopPropagation();
         });
     })
 
@@ -136,11 +145,11 @@ export function evListener() {
     //         photoMagnificationFieldContent.innerHTML = '';
     //         photoMagnificationFieldContent.append(closePhotoMagnification.cloneNode(true));
     //         photoMagnificationFieldContent.append(resultPhotoClone);
-            // photoMagnificationField.classList.add('visible');
-    //         // const a = photoMagnificationFieldContent.querySelector('.photo-magnification-field__close');
-    //         // a.addEventListener('click', (e) => {
-    //         //     photoMagnificationField.classList.remove('visible');
-    //         // })
+    //         photoMagnificationField.classList.add('visible');
+    //         const a = photoMagnificationFieldContent.querySelector('.photo-magnification-field__close');
+    //         a.addEventListener('click', (e) => {
+    //             photoMagnificationField.classList.remove('visible');
+    //         })
     //     })
     // }
     // )
