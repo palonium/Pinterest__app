@@ -121,4 +121,5 @@ searchInput.addEventListener('input', function () {
             );
         }
     });
+    evListener()
 });
