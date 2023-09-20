@@ -49,7 +49,7 @@ export function evListener() {
     const lockPadding = document.querySelectorAll('.lock-padding');
     const addBtn = document.querySelector('.picture__add');
     const modalSelectBoard = document.querySelector('.photo-board');
-    const closeModalSelectBoard = document.querySelector('.close');
+    const closeModalSelectBoard = document.querySelector('.photo-board__close');
     const complainModal = document.querySelector('.complains');
     const closeComplainModal = document.querySelector('.complain__close');
     const pictureMenu = document.querySelectorAll('.picture__menu');
