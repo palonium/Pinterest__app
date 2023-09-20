@@ -107,18 +107,3 @@ const searchInput = document.querySelector('.header__search');
 searchInput.addEventListener('input', function () {
     const searchTerm = searchInput.value.toLowerCase();
 
-    const picturesContainer = document.querySelector('.pictures');
-    picturesContainer.innerHTML = ''; 
-
-    photosData.forEach((photo, index) => {
-        if (photo.tags.toLowerCase().includes(searchTerm)) {
-            addToPage(
-                `pic${index + 1}`,
-                photo.src,
-                photo.alt,
-                photo.tags,
-                photo.avatarSrc
-            );
-        }
-    });
-});
