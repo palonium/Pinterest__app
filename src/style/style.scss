@@ -301,11 +301,11 @@
 
     &__content {
         background-color: rgba(205, 200, 198, 0.8);
-        margin: 25% auto;
+        margin: auto;
         padding: 15px;
         border: 1px solid black;
         max-width: 300px;
-        height: 100px;
+        // height: 100px;
         border-radius: 15px;
         display: flex;
         justify-content: center;
