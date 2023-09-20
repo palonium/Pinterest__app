@@ -59,7 +59,6 @@ function addUser() {
     const promise = fetch('https://jsonplaceholder.typicode.com/users');
     promise.then((response) => {
         response.json().then((data) => {
-            console.log(listUser.arrUser.length === 0);
             data.forEach(item => {
                 listUser.arrUser.push(new User(item.id, item.name, item.email))
             });
@@ -73,7 +72,7 @@ function addUser() {
 
 
 }
-addUser();
+// addUser();
 
 export function saveListUserToLocalStorage(listUser) {
     localStorage.setItem(`listUsers`, JSON.stringify(listUser));
@@ -83,9 +82,9 @@ function getListUserTolocalStorege() {
 
 }
 // console.log(dataUser.arrUser);
-if (dataUser != null) {
-    dataUser.arrUser.forEach(a => listUser = new UserList(a))
-}
+// if (dataUser != null) {
+//     dataUser.arrUser.forEach(a => listUser = new UserList(a))
+// }
 
 
 
