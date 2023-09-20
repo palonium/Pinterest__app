@@ -73,7 +73,6 @@ if (photosData.length === 0) {
     savePhotosToLocalStorage();
 }
 
-// Создаем массив для фотографий, добавленных на доску
 let boardPhotos = [];
 
 function displayPhotos() {
