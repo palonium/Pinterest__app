@@ -53,6 +53,7 @@ export function addToPage(id, src, alt, tags, avatarSrc) {
     pictureComplain.innerHTML = 'Пожаловаться';
     pictureMenu.append(pictureComplain);
     picBox.append(pictureMenu);
+    
 }
 
 let photosData = getPhotosFromLocalStorage();
@@ -102,27 +103,7 @@ function getPhotosFromLocalStorage() {
 }
 
 const searchInput = document.querySelector('.header__search');
+
 searchInput.addEventListener('input', function () {
     const searchTerm = searchInput.value.toLowerCase();
-    const picturesContainer = document.querySelector('.pictures');
-    while (picturesContainer.firstChild) {
-        picturesContainer.removeChild(picturesContainer.firstChild);
-    }
-
-    for (let i = 0; i < boardPhotos.length; i++) {
-        const photo = boardPhotos[i];
-        const tagsLowerCase = photo.tags.toLowerCase();
-
-        if (tagsLowerCase.includes(searchTerm)) {
-            addToPage(
-                `pic${i + 1}`,
-                photo.src,
-                photo.alt,
-                photo.tags,
-                photo.avatarSrc
-            );
-        }
-    }
-});
-
 
