@@ -51,11 +51,18 @@ class UserList {
     }
 
 }
-
 export let listUser = new UserList();
-let dataUser = getListUserTolocalStorege()
-function addUser() {
+let dataUser = getListUserTolocalStorege();
 
+
+
+
+
+
+
+
+
+function addUser() {
     const promise = fetch('https://jsonplaceholder.typicode.com/users');
     promise.then((response) => {
         response.json().then((data) => {
@@ -69,11 +76,13 @@ function addUser() {
     }
     )
 
-
-
+}
+if (dataUser != null) {
+    dataUser.arrUser.forEach(a => listUser = new UserList(a));
 
 }
-addUser();
+
+addUser()
 
 export function saveListUserToLocalStorage(listUser) {
     localStorage.setItem(`listUsers`, JSON.stringify(listUser));
@@ -82,12 +91,6 @@ function getListUserTolocalStorege() {
     return JSON.parse(localStorage.getItem(`listUsers`));
 
 }
-// console.log(dataUser.arrUser);
-if (dataUser != null) {
-    dataUser.arrUser.forEach(a => listUser = new UserList(a))
-}
-
-
 
 
 
