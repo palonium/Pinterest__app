@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <title>Pinterest</title>
 </head>
 
@@ -43,9 +46,10 @@
                     </defs>
                 </svg>
             </a>
-            <button id="addBoard">New boards</button>
-            <input class="header__boards" id="NameBoard" type="text" placeholder="Введите имя ">
-            <button id="openModalButton">Добавить фото</button>
+            <input type="text" class="header__search" name="" id="" placeholder="Поиск...">
+            <button class="header__btn" id="addBoard">Добавить доску</button>
+           
+            <button class="header__btn" id="openModalButton">Добавить фото</button>
             <div class="modal" id="uploadModal">
                 <div class="modal-content">
                     <span class="close" id="closeUploadModal">&times;</span>
@@ -55,10 +59,10 @@
                     <button id="uploadButton">Загрузить фото</button>
                 </div>
             </div>
-            <select name="" id="boards" class="header__boards">
+            <select name="" id="boards" class="header__boards" aria-placeholder="Выберите доску">
 
             </select>
-
+            <input class="header__boards" id="NameBoard" type="text" placeholder="Введите имя доски">
         </header>
         <div class="pictures">
         </div>
@@ -83,7 +87,7 @@
             <div class="photo-board__content">
                 <h2 class="photo-board__title">Выберите доску:</h2>
                 <div class="board-list"></div>
-                <button class="close btn">Закрыть</button>
+                <button class="photo-board__close btn">Закрыть</button>
             </div>
 
         </div>
@@ -193,16 +197,12 @@
     </div> -->
 
     <div class="photo-magnification-field">
-       <div class="photo-magnification-field__wrapper">
-        <div class="photo-magnification-field__content">
-            <button class="photo-magnification-field__close btn">X</button>
+        <div class="photo-magnification-field__wrapper">
+            <div class="photo-magnification-field__content">
+                <button class="photo-magnification-field__close btn">X</button>
+            </div>
         </div>
-       </div> 
     </div>
-    <!--     
-            <script src="./js/pictures.js"></script>
-            <script src="./js/board.js"></script>
-            <script src="./js/modal-windows.js"></script> -->
 </body>
 
 </html>
