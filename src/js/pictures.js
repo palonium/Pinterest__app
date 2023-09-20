@@ -1,4 +1,3 @@
-
 'use strict';
 
 import { evListener } from './modal-windows.js';
@@ -68,11 +67,13 @@ if (photosData.length === 0) {
         { src: 'img/6.jpg', alt: '2', tags: '#медузы', avatarSrc: 'img/avatar.jpg' },
         { src: 'img/7.jpg', alt: '2', tags: '#абстракция', avatarSrc: 'img/avatar.jpg' },
         { src: 'img/8.jpg', alt: '2', tags: '#шрек', avatarSrc: 'img/avatar.jpg' },
-
     ];
 
     savePhotosToLocalStorage();
 }
+
+// Создаем массив для фотографий, добавленных на доску
+let boardPhotos = [];
 
 function displayPhotos() {
     for (let i = 0; i < photosData.length; i++) {
@@ -87,19 +88,6 @@ function displayPhotos() {
     }
 }
 
-const openModalButton = document.getElementById('openModalButton');
-const uploadModal = document.getElementById('uploadModal');
-
-openModalButton.addEventListener('click', function() {
-    uploadModal.style.display = 'block';
-});
-
-const closeUploadModal = document.getElementById('closeUploadModal');
-closeUploadModal.addEventListener('click', function() {
-    uploadModal.style.display = 'none';
-});
-
-
 document.addEventListener('DOMContentLoaded', function () {
     displayPhotos();
     evListener();
@@ -112,6 +100,7 @@ function getPhotosFromLocalStorage() {
     const photosDataStr = localStorage.getItem('photosData');
     return photosDataStr ? JSON.parse(photosDataStr) : [];
 }
+
 const searchInput = document.querySelector('.header__search');
 searchInput.addEventListener('input', function () {
     const searchTerm = searchInput.value.toLowerCase();
@@ -120,67 +109,20 @@ searchInput.addEventListener('input', function () {
         picturesContainer.removeChild(picturesContainer.firstChild);
     }
 
-    for (let i = 0; i < photosData.length; i++) {
-        const photo = photosData[i];
-        const tagsLowerCase = photo.tags.toLowerCase(); 
+    for (let i = 0; i < boardPhotos.length; i++) {
+        const photo = boardPhotos[i];
+        const tagsLowerCase = photo.tags.toLowerCase();
 
         if (tagsLowerCase.includes(searchTerm)) {
-            addToPage( 
+            addToPage(
                 `pic${i + 1}`,
                 photo.src,
                 photo.alt,
                 photo.tags,
                 photo.avatarSrc
-            ); }
-        }
-    });
-function addPhotoFromDevice(fileInput, hashTagInput) {
-    const file = fileInput.files[0];
-    const hashTag = hashTagInput.value;
-
-    if (file) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-
-        reader.onload = function () {
-            const newPhotoId = `pic${photosData.length + 1}`;
-
-            const newPhotoData = {
-                src: reader.result,
-                alt: 'Новая фотография',
-                tags: hashTag,
-                avatarSrc: 'img/avatar.jpg',
-            };
-            photosData.push(newPhotoData);
-
-            addToPage(
-                newPhotoId,
-                newPhotoData.src,
-                newPhotoData.alt,
-                newPhotoData.tags,
-                newPhotoData.avatarSrc
             );
-
-            const newPicBox = document.getElementById(newPhotoId);
-            newPicBox.addEventListener('mouseover', () => {
-                newPicBox.querySelector('.picture__menu').classList.add('visible');
-            });
-            newPicBox.addEventListener('mouseout', () => {
-                newPicBox.querySelector('.picture__menu').classList.remove('visible');
-            });
-
-            savePhotosToLocalStorage(); 
-        };
+        }
     }
-}
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    const fileInput = document.getElementById('fileInput');
-    const hashTagInput = document.getElementById('hashTagInput');
-    const uploadButton = document.getElementById('uploadButton');
-
-    uploadButton.addEventListener('click', function () {
-        addPhotoFromDevice(fileInput, hashTagInput);
-    });
 });
+
+
