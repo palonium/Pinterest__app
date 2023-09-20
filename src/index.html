@@ -45,7 +45,16 @@
             </a>
             <button id="addBoard">New boards</button>
             <input class="header__boards" id="NameBoard" type="text" placeholder="Введите имя ">
-
+            <button id="openModalButton">Добавить фото</button>
+            <div class="modal" id="uploadModal">
+                <div class="modal-content">
+                    <span class="close" id="closeUploadModal">&times;</span>
+                    <h2>Загрузка фото</h2>
+                    <input type="file" id="fileInput">
+                    <input type="text" id="hashTagInput" placeholder="Введите хэштег">
+                    <button id="uploadButton">Загрузить фото</button>
+                </div>
+            </div>
             <select name="" id="boards" class="header__boards">
 
             </select>
